@@ -27,6 +27,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import axios from "axios";
+import router from "next/router";
+import { connect } from "@/dbConfig/dbConfig";
+
+connect();
+
 const formSchema = z.object({
   email: z.string().min(10, {
     message: "Username must be at least 2 characters.",
@@ -48,7 +54,7 @@ export default function Page() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    router.post("/login", values);
   }
 
   return (
